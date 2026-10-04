@@ -70,7 +70,7 @@ def search_catalogue(query: str, limit: int = 8) -> list[dict[str, Any]]:
                 inventory = [dict(item) for item in conn.execute("SELECT size, quantity FROM inventory WHERE product_id = ? ORDER BY id", (row["product_id"],))]
                 scored.append((score, row, inventory))
         scored.sort(key=lambda item: (-item[0], item[1]["name"]))
-        result = [{"product_id": row["product_id"], "name": row["name"], "garment_type": row["garment_type"], "description": row["description"], "colors": json.loads(row["colors"]), "price": row["price"], "image_url": f"/media/{row['image_file_path']}", "inventory": inventory} for _, row, inventory in scored[:limit]]
+        result = [{"product_id": row["product_id"], "name": row["name"], "garment_type": row["garment_type"], "description": row["description"], "colors": json.loads(row["colors"]), "price": row["price"], "image_url": f"/media/{Path(row['image_file_path']).name}", "inventory": inventory} for _, row, inventory in scored[:limit]]
         audit_event("catalogue_search", {"query": query, "limit": limit}, {"count": len(result)}, "tool completed")
         return result
     finally:
@@ -99,7 +99,7 @@ def alternative_products(product: str, limit: int = 4) -> AlternativesResult:
                 reason = "same garment type" if same_type else "shared colors or search tags"
                 candidates.append((score, row, reason))
         candidates.sort(key=lambda item: (-item[0], item[1]["name"]))
-        result = AlternativesResult(status="found", source_product=source["name"], alternatives=[AlternativeProduct(product_id=row["product_id"], name=row["name"], price=row["price"], image_url=f"/media/{row['image_file_path']}", reason=reason) for _, row, reason in candidates[:limit]])
+        result = AlternativesResult(status="found", source_product=source["name"], alternatives=[AlternativeProduct(product_id=row["product_id"], name=row["name"], price=row["price"], image_url=f"/media/{Path(row['image_file_path']).name}", reason=reason) for _, row, reason in candidates[:limit]])
         audit_event("alternatives_for_unavailable", {"product": product, "limit": limit}, {"status": result.status, "count": len(result.alternatives)}, "tool completed")
         return result
     finally:
