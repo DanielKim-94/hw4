@@ -166,7 +166,7 @@ The live lowercase Vite server at port 5175 serves `hw4/frontend/App.tsx`. A fre
 
 The history endpoint now returns `products_json`. After a logged-in category request, the saved assistant record restored 8 product cards from `products_json` on the next history load. The database, authentication, Portkey configuration, and fixed ports were preserved.
 
-The existing `check2-category.png` was inspected and is still the older screenshot without the result cards. It was not replaced or claimed as fresh evidence. A browser screenshot showing the response and cards together remains required for replacement Problem 11 evidence.
+The replacement `check2-category.png` was inspected and now shows the category question, grounded response, and all eight loaded result cards together. It is ready as the replacement Problem 11 evidence.
 
 Start the frontend from lowercase `hw4` with `npm.cmd run dev -- --host 127.0.0.1 --port 5175`; the production frontend check is `npm.cmd run build`.
 
