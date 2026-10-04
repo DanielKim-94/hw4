@@ -160,6 +160,14 @@ Fresh-clone setup now creates `hw4/.venv`, installs `requirements.txt`, loads th
 
 The in-app browser surface was unavailable for automation, but the user-provided replacement screenshot was verified in `output/app_check_images/check2-category.png`: it shows the category question, grounded response, and resulting product cards together. Browser-level refresh persistence remains unverified visually; the API history restoration check passed.
 
+## Category-result rendering follow-up
+
+The live lowercase Vite server at port 5175 serves `hw4/frontend/App.tsx`. A fresh `What hoodies do you have?` request returned HTTP 200 with 8 `suggested_products`. The frontend now renders `chat-results` before the footer, updates `chatProducts`, and scrolls the result section into view after a non-empty category response.
+
+The history endpoint now returns `products_json`. After a logged-in category request, the saved assistant record restored 8 product cards from `products_json` on the next history load. The database, authentication, Portkey configuration, and fixed ports were preserved.
+
+The existing `check2-category.png` was inspected and is still the older screenshot without the result cards. It was not replaced or claimed as fresh evidence. A browser screenshot showing the response and cards together remains required for replacement Problem 11 evidence.
+
 Start the frontend from lowercase `hw4` with `npm.cmd run dev -- --host 127.0.0.1 --port 5175`; the production frontend check is `npm.cmd run build`.
 
 ### Audit trail

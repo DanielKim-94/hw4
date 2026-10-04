@@ -158,7 +158,7 @@ def chat_history(x_session_token: str | None = Header(default=None), campus_sess
         user = session_user(x_session_token or campus_session, conn)
         if user is None:
             raise HTTPException(status_code=401, detail="Login required to load chat history.")
-        rows = conn.execute("SELECT role, content, created_at FROM chat_messages WHERE user_id = ? ORDER BY id", (user["id"],)).fetchall()
+        rows = conn.execute("SELECT role, content, products_json, created_at FROM chat_messages WHERE user_id = ? ORDER BY id", (user["id"],)).fetchall()
         return [dict(row) for row in rows]
     finally:
         conn.close()
