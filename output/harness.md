@@ -158,7 +158,7 @@ The `run_chat` fallback validates every catalogue match with `ProductReference.m
 
 Fresh-clone setup now creates `hw4/.venv`, installs `requirements.txt`, loads the repository-root `hw4/.env`, and starts fixed ports 8015 and 5175. Verified results: 102 products, product image 200, database media URL 404, supplied login 200, new-account registration 200, chat 200, inventory answer of 5 for Basic Hoodie Big Yale size M, current-product pink question grounded in real colors, history count increased and restored, and production build passed.
 
-The in-app browser surface was unavailable during this review, so browser-level refresh persistence and visual card rendering remain unverified here. The app is ready at `http://127.0.0.1:5175/` for a replacement Problem 11 screenshot showing the category response and the resulting cards together.
+The in-app browser surface was unavailable for automation, but the user-provided replacement screenshot was verified in `output/app_check_images/check2-category.png`: it shows the category question, grounded response, and resulting product cards together. Browser-level refresh persistence remains unverified visually; the API history restoration check passed.
 
 Start the frontend from lowercase `hw4` with `npm.cmd run dev -- --host 127.0.0.1 --port 5175`; the production frontend check is `npm.cmd run build`.
 
