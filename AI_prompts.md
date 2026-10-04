@@ -260,3 +260,9 @@ The lowercase `hw4` submission was committed and pushed to `https://github.com/D
 ### Problem 13 finalization request
 
 > Complete Problem 13 using only the final lowercase hw4 folder. My public GitHub repository URL is https://github.com/DanielKim-94/hw4. Inspect git status and git remote -v. Verify that the latest chatbot fix, startup script, documentation, app_check.html, and the three required screenshots are included. Confirm relative image paths and exclusions for real environment files, databases, and original product images. Record this request in AI_prompts.md. Stage the intended submission files, create a new commit preserving existing commits, configure the remote if necessary, push the current branch using ordinary Git commands, verify the remote branch matches the final local commit and the repository is publicly accessible, and mark Problem 13 complete only after a successful push. Return the exact repository URL and final commit ID.
+
+### Final review follow-up
+
+> Review and fix the final lowercase hw4 project before submission: restrict `/media` to product images, send session/page/product context with chat and restore full history, validate fallback product references, make repository-root `.env` and virtual-environment setup reproducible, verify product/login/registration/chat/current-product behavior, update documentation, and report browser verification status for a replacement Problem 11 screenshot.
+
+**Result:** Code and API checks passed; browser visual verification remained unavailable because no browser surface was available.

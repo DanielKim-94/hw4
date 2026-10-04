@@ -12,7 +12,14 @@ The local data pack is intentionally excluded from Git. Place the supplied archi
 
 ## Configuration
 
-Copy `.env.example` to `.env` in the repository root and set `PORTKEY_API_KEY` locally. Keep the real `.env` private. The default model is `gpt-5.6-luna`; `OPENAI_MODEL` may override it locally.
+Create the virtual environment and install dependencies from the repository root:
+
+```powershell
+py -3 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+Copy `.env.example` to `.env` in this repository root and set `PORTKEY_API_KEY` locally. Keep the real `.env` private. The backend loads only `hw4/.env` (or an explicitly supplied process environment variable); it does not depend on a parent workspace `.env`. The default model is `gpt-5.6-luna`; `OPENAI_MODEL` may override it locally.
 
 ## Backend
 
@@ -42,7 +49,7 @@ Set-ExecutionPolicy -Scope Process Bypass
 
 Then open `http://127.0.0.1:5175/`. The script starts the backend on port 8015 and connects the Vite frontend to it.
 
-Open the Vite URL shown in the terminal. If the backend uses another port, set `VITE_API_URL` before starting Vite.
+Open `http://127.0.0.1:5175/`. The fixed ports are part of the reproducible launcher; do not start the old `HW 4` project.
 
 ## Verification
 

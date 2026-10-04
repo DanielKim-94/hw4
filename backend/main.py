@@ -18,6 +18,7 @@ from models import ChatRequest, ChatResponse, CustomerContext
 ROOT = Path(__file__).resolve().parents[1]
 DB_PATH = ROOT / "data" / "data" / "campus_customs.db"
 IMAGE_ROOT = ROOT / "data" / "data"
+PRODUCT_IMAGE_ROOT = IMAGE_ROOT / "products"
 
 app = FastAPI(title="Campus Customs API")
 app.add_middleware(
@@ -34,7 +35,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.mount("/media", StaticFiles(directory=IMAGE_ROOT), name="media")
+app.mount("/media", StaticFiles(directory=PRODUCT_IMAGE_ROOT), name="media")
 PASSWORD_ITERATIONS = 310_000
 SESSIONS: dict[str, int] = {}
 
@@ -91,7 +92,7 @@ def product_from_row(row: sqlite3.Row, conn: sqlite3.Connection) -> dict[str, An
         "colors": json.loads(row["colors"]),
         "search_tags": json.loads(row["search_tags"]),
         "image_file_path": row["image_file_path"],
-        "image_url": f"/media/{row['image_file_path']}",
+        "image_url": f"/media/{Path(row['image_file_path']).name}",
         "price": row["price"],
         "inventory": [dict(item) for item in inventory],
     }

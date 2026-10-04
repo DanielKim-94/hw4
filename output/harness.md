@@ -142,13 +142,25 @@ The system prompt requires database-grounded product answers, privacy protection
 
 ### Model configuration and startup
 
-`backend/agent.py` loads `PORTKEY_API_KEY` from the environment/workspace `.env` without printing it, uses `gpt-5.6-luna`, and sends requests through `https://api.portkey.ai/v1`. Start the backend from `HW 4/backend` with:
+`backend/agent.py` loads `PORTKEY_API_KEY` from the lowercase repository-root `.env` without printing it, uses `gpt-5.6-luna`, and sends requests through `https://api.portkey.ai/v1`. Start the backend from `hw4/backend` with:
 
 ```powershell
-..\.venv\Scripts\python.exe -m uvicorn main:app --reload --port 8000
+..\.venv\Scripts\python.exe -m uvicorn main:app --host 127.0.0.1 --port 8015
 ```
 
-Start the frontend from `HW 4` with `npm.cmd run dev`; set `VITE_API_URL` if the backend uses a different local port. The production frontend check is `npm.cmd run build`.
+## Final lowercase hw4 review
+
+The `/media` mount now exposes only `data/data/products/`. `GET /media/campus_customs.db` returns 404, while a real product image returns 200. Product API image URLs use `/media/<filename>`.
+
+The frontend sends `X-Session-Token` when available and includes `conversation`, `current_page`, and `product_id` in every chat request. Logged-in history is restored as the full sequence of user and assistant messages, not only the last reply. A current-product test for Basic Hoodie Big Yale returned that pink is unavailable because the real colors are navy blue and white.
+
+The `run_chat` fallback validates every catalogue match with `ProductReference.model_validate`. The isolated fallback test returned eight `ProductReference` objects, and authenticated chat saving completed without a `.model_dump()` error.
+
+Fresh-clone setup now creates `hw4/.venv`, installs `requirements.txt`, loads the repository-root `hw4/.env`, and starts fixed ports 8015 and 5175. Verified results: 102 products, product image 200, database media URL 404, supplied login 200, new-account registration 200, chat 200, inventory answer of 5 for Basic Hoodie Big Yale size M, current-product pink question grounded in real colors, history count increased and restored, and production build passed.
+
+The in-app browser surface was unavailable during this review, so browser-level refresh persistence and visual card rendering remain unverified here. The app is ready at `http://127.0.0.1:5175/` for a replacement Problem 11 screenshot showing the category response and the resulting cards together.
+
+Start the frontend from lowercase `hw4` with `npm.cmd run dev -- --host 127.0.0.1 --port 5175`; the production frontend check is `npm.cmd run build`.
 
 ### Audit trail
 

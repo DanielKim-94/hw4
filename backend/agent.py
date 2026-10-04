@@ -8,12 +8,12 @@ from pydantic_ai import UsageLimits
 from pydantic_ai.models.openai import OpenAIChatModel
 from pydantic_ai.providers.openai import OpenAIProvider
 
-from models import AlternativesResult, ChatResponse, CustomerContext, ProductInfo, StockLookup
+from models import AlternativesResult, ChatResponse, CustomerContext, ProductInfo, ProductReference, StockLookup
 from tools import alternative_products, get_product_info, get_stock, search_catalogue
 from audit import audit_event
 
 ROOT = Path(__file__).resolve().parents[1]
-load_dotenv(ROOT.parent / ".env")
+load_dotenv(ROOT / ".env")
 MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-5.6-luna")
 PORTKEY_API_KEY = os.getenv("PORTKEY_API_KEY")
 if not PORTKEY_API_KEY:
@@ -62,6 +62,6 @@ def run_chat(message: str, conversation: list[dict[str, str]] | None = None, cus
         raise
     if not answer.suggested_products:
         matches = search_catalogue(message)
-        answer.suggested_products = [{"product_id": item["product_id"], "name": item["name"], "price": item["price"], "image_url": item["image_url"], "garment_type": item["garment_type"], "description": item["description"]} for item in matches]
+        answer.suggested_products = [ProductReference.model_validate({"product_id": item["product_id"], "name": item["name"], "price": item["price"], "image_url": item["image_url"], "garment_type": item["garment_type"], "description": item["description"]}) for item in matches]
     audit_event("agent_run", {"message": message}, {"suggested_product_count": len(answer.suggested_products)}, "agent run completed")
     return answer
