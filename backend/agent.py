@@ -1,4 +1,5 @@
 import os
+import httpx2 as httpx
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -19,7 +20,14 @@ if not PORTKEY_API_KEY:
     raise RuntimeError("PORTKEY_API_KEY is not configured. Add it to the workspace .env or environment.")
 
 SYSTEM_PROMPT = (Path(__file__).parent / "prompts" / "prompt.md").read_text(encoding="utf-8")
-provider = OpenAIProvider(api_key=PORTKEY_API_KEY, base_url="https://api.portkey.ai/v1")
+portkey_client = httpx.AsyncClient(
+    headers={"x-portkey-api-key": PORTKEY_API_KEY}, timeout=30.0
+)
+provider = OpenAIProvider(
+    api_key=PORTKEY_API_KEY,
+    base_url="https://api.portkey.ai/v1",
+    http_client=portkey_client,
+)
 shop_agent = Agent(OpenAIChatModel(MODEL_NAME, provider=provider), output_type=ChatResponse, deps_type=CustomerContext, system_prompt=SYSTEM_PROMPT)
 
 @shop_agent.tool

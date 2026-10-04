@@ -4,7 +4,7 @@ import { ArrowRight, ChevronLeft, MessageCircle, Search, X } from "lucide-react"
 
 type Stock = { size: string; quantity: number };
 type Product = { product_id: string; name: string; garment_type: string; description: string; colors: string[]; search_tags: string[]; image_url: string; price: number; inventory: Stock[] };
-const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const API = import.meta.env.VITE_API_URL || "http://127.0.0.1:8015";
 const money = (price: number) => `$${price.toFixed(2)}`;
 const image = (p: Product) => `${API}${p.image_url}`;
 

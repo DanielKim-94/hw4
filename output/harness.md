@@ -184,3 +184,44 @@ The exact Problem 2 request is recorded below.
 > Do not modify the database or invent missing fields. If the data pack is missing, tell me exactly what files you need. Record this prompt under Problem 2.
 
 **Status:** In progress
+
+## Recurring startup and chatbot diagnosis
+
+This follow-up was performed only in the lowercase `hw4` project. The older `HW 4` project was not modified.
+
+### Configuration evidence
+
+- The Windows User environment has no `PORTKEY_API_KEY`.
+- The current process environment has a `PORTKEY_API_KEY`.
+- The workspace root `.env` has `PORTKEY_API_KEY`; `HW 1/.env` has the same value. Values were compared privately and never printed. `hw4/.env.local` contains only the frontend API URL, not credentials.
+- `backend/agent.py` loads the workspace root `.env` with `load_dotenv(ROOT.parent / ".env")`; an already-set process variable takes precedence under python-dotenv. The effective backend value is therefore the current process value when present, otherwise the root `.env` value.
+- Codex `config.toml` sets model `gpt-5.6-luna` but declares no Portkey provider or base URL. The Codex session provider is separate from this application's Portkey configuration.
+
+### Request diagnosis
+
+The application endpoint is `https://api.portkey.ai/v1`, model `gpt-5.6-luna`, and PydanticAI uses the OpenAI-compatible chat-completions interface. The working Homework 3 integration sends the Portkey-specific `x-portkey-api-key` header through its HTTP client. The original hw4 agent supplied only the generic OpenAI authorization path, which produced `ModelAPIError: Connection error`.
+
+The minimal independent request initially failed at the PydanticAI transport layer. After matching the Homework 3 client configuration (`httpx2.AsyncClient(headers={"x-portkey-api-key": key})`), the independent agent request succeeded. This is evidence of a client-header/configuration mismatch, not an expiration conclusion from HTTP 403. No credential, request ID, or secret was written to this document.
+
+### Layered verification
+
+- Independent PydanticAI request: passed; returned a real price answer and 8 suggested products.
+- FastAPI `/api/products`: HTTP 200; 102 products.
+- FastAPI `/api/chat`: HTTP 200; real answer for `Basic Hoodie Big Yale` was `$68.00`.
+- Inventory chat: HTTP 200; size M answer reported exact quantity 5.
+- Dynamic search chat: HTTP 200; `What hoodies do you have?` returned 8 structured product cards.
+- Supplied login: HTTP 200; session token returned without exposing credentials.
+- Frontend origin: HTTP 200 at `http://127.0.0.1:5175/`.
+
+The browser screenshot layer was not claimed as complete because no browser automation surface was available in this environment. The API response contains the structured cards consumed by the widget.
+
+### Reproducible startup
+
+`start_hw4.ps1` uses only `hw4/.venv`, fixed ports 8015 and 5175, and the lowercase `hw4` working directory. It checks each port before starting a process, so rerunning it does not intentionally create duplicate servers. If a port is occupied by another process, stop that process or report the conflict before launching.
+
+The lowercase project now has its own `.venv`; the launcher no longer references the old `HW 4` environment. Run:
+
+```powershell
+cd "C:\Users\1dank\OneDrive\바탕 화면\AI Foundations Homework\hw4"
+powershell -ExecutionPolicy Bypass -File .\start_hw4.ps1
+```

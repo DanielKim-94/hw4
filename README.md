@@ -19,7 +19,7 @@ Copy `.env.example` to `.env` in the repository root and set `PORTKEY_API_KEY` l
 ```powershell
 cd backend
 ..\.venv\Scripts\python.exe -m pip install -r ..\requirements.txt
-..\.venv\Scripts\python.exe -m uvicorn main:app --reload --port 8000
+  ..\.venv\Scripts\python.exe -m uvicorn main:app --host 127.0.0.1 --port 8015
 ```
 
 The backend reads the existing SQLite schema; no destructive initialization is required. If starting from a fresh data pack, unpack it as described above. Existing password-format migration is performed safely when the known test account logs in.
@@ -33,6 +33,15 @@ npm install
 npm run dev
 ```
 
+For a repeatable local launch after reopening VS Code, from `hw4` run:
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+.\start_hw4.ps1
+```
+
+Then open `http://127.0.0.1:5175/`. The script starts the backend on port 8015 and connects the Vite frontend to it.
+
 Open the Vite URL shown in the terminal. If the backend uses another port, set `VITE_API_URL` before starting Vite.
 
 ## Verification
@@ -41,4 +50,4 @@ Open the Vite URL shown in the terminal. If the backend uses another port, set `
 npm run build
 ```
 
-The app uses real catalogue and inventory data, session-scoped chat history, structured agent tools, and an append-only `output/audit_trail.json`. Required submission screenshots belong in `output/app_check_images/`; they are intentionally not generated or claimed here because Problem 11 screenshot capture remains incomplete.
+The app uses real catalogue and inventory data, session-scoped chat history, structured agent tools, and an append-only `output/audit_trail.json`. Problem 11 evidence is in `output/app_check.html` with screenshots in `output/app_check_images/`.

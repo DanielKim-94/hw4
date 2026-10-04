@@ -24,6 +24,19 @@ The initial files needed problem titles and more accurate ignore rules.
 
 **Status:** In progress
 
+### Follow-up correction
+
+> I need to capture the real screenshots required for Problem 11.
+> Start the frontend and backend for the final hw4 submission project and keep both servers running. Verify that the local database, product images, and model credentials are available through the correct local paths without exposing or committing them.
+> Give me the actual browser URL and step-by-step instructions for showing:
+> 1. A chatbot inventory lookup for a real product and size, with the answer checked against the database.
+> 2. Product cards appearing on the webpage after asking “What hoodies do you have?”
+> 3. One usability improvement actually implemented in Problem 9.
+> Create output/app_check_images/ if necessary. Tell me which implemented usability feature to demonstrate and what should be visible in each screenshot.
+> Do not fabricate screenshots or mark the evidence complete yet. After I save the screenshots, update output/app_check.html with relative image paths and accurate captions. Record this request as a Problem 11 follow-up.
+
+The final submission servers are running; screenshot evidence remains incomplete until the user captures and saves the images.
+
 ### Prompt submitted (repeated)
 
 > For Problem 5(PydanticAI agent backend), connect the website’s chat widget to a real PydanticAI agent through FastAPI.
@@ -195,9 +208,20 @@ The initial files needed problem titles and more accurate ignore rules; the requ
 > Use relative image paths so app_check.html can be opened directly by double-clicking. Do not fabricate screenshots or claim that untested features passed. If you cannot capture screenshots, give me precise steps to capture them myself.
 > Verify the HTML and images open correctly, and record this prompt.
 
-**Status:** In progress
+**Status:** Completed
 
-Screenshot capture is blocked because the frontend is down and no browser surface is available. No screenshots or unverified HTML were created.
+### Follow-up correction
+
+> I need to capture the real screenshots required for Problem 11.
+> Start the frontend and backend for the final hw4 submission project and keep both servers running. Verify that the local database, product images, and model credentials are available through the correct local paths without exposing or committing them.
+> Give me the actual browser URL and step-by-step instructions for showing:
+> 1. A chatbot inventory lookup for a real product and size, with the answer checked against the database.
+> 2. Product cards appearing on the webpage after asking “What hoodies do you have?”
+> 3. One usability improvement actually implemented in Problem 9.
+> Create output/app_check_images/ if necessary. Tell me which implemented usability feature to demonstrate and what should be visible in each screenshot.
+> Do not fabricate screenshots or mark the evidence complete yet. After I save the screenshots, update output/app_check.html with relative image paths and accurate captions. Record this request as a Problem 11 follow-up.
+
+The three genuine screenshots are now present in `output/app_check_images/`, and `output/app_check.html` uses relative paths with verified captions.
 
 ## Problem 12 — Title not provided
 
@@ -225,4 +249,14 @@ Live Portkey chat checks remain blocked by the unresolved model connection issue
 
 **Status:** In progress
 
-The local `hw4` submission folder is prepared, but GitHub publication is pending because GitHub CLI is unavailable, no repository URL was supplied, and Problem 11 screenshots are still missing.
+The local `hw4` submission folder is prepared. GitHub publication is still pending because GitHub CLI is unavailable and no public repository URL has been supplied. Problem 11 evidence is now present in `output/app_check.html`.
+
+### Problem 5 follow-up
+
+> Please diagnose the recurring startup and chatbot failures systematically. Do not conclude that my API key is expired based only on HTTP 403. Use the final lowercase hw4 folder as the single working project. Identify credential sources without printing secrets, inspect Codex settings, inspect the failed model request, isolate the failure through independent model, agent, API, and browser layers, make startup reproducible on ports 5175 and 8015, verify products/login/chat/inventory/search, restart with the launcher, and record the actual results.
+
+**Result:** The working Homework 3 Portkey client configuration was restored in lowercase `hw4/backend/agent.py` by sending `x-portkey-api-key` through the `httpx2` client. The isolated agent request, FastAPI chat, inventory lookup, dynamic search cards, login, and launcher restart passed. Details are recorded in `output/harness.md`.
+
+### Problem 13 finalization request
+
+> Complete Problem 13 using only the final lowercase hw4 folder. My public GitHub repository URL is https://github.com/DanielKim-94/hw4. Inspect git status and git remote -v. Verify that the latest chatbot fix, startup script, documentation, app_check.html, and the three required screenshots are included. Confirm relative image paths and exclusions for real environment files, databases, and original product images. Record this request in AI_prompts.md. Stage the intended submission files, create a new commit preserving existing commits, configure the remote if necessary, push the current branch using ordinary Git commands, verify the remote branch matches the final local commit and the repository is publicly accessible, and mark Problem 13 complete only after a successful push. Return the exact repository URL and final commit ID.
