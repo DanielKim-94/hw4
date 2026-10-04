@@ -233,9 +233,9 @@ The three genuine screenshots are now present in `output/app_check_images/`, and
 > Finish output/harness.md with the actual database structure, model fields, tools, authentication, chat memory, page context, safety rules, model configuration, execution limits, and frontend/backend startup instructions.
 > Run several chat checks to produce real audit entries and verify earlier entries remain. Record this prompt.
 
-**Status:** In progress
+**Status:** Completed
 
-Live Portkey chat checks remain blocked by the unresolved model connection issue from Problem 5; the audit trail itself was verified with real database-backed tool checks.
+Live Portkey chat checks passed after the Portkey-specific client-header fix documented in the Problem 5 follow-up. The audit trail and safety controls were verified.
 
 ## Problem 13 — Title not provided
 
@@ -247,9 +247,9 @@ Live Portkey chat checks remain blocked by the unresolved model connection issue
 > Verify that real .env files, campus_customs.db, and original product images are excluded, while the required app-check screenshots remain included. Check tracked files and any existing Git history for exposed secrets.
 > Record this prompt before the final commit. Help me push the project to a public GitHub repository, using the normal sign-in flow if needed. Verify the repository is accessible and give me the exact URL to submit on Canvas. This assignment requires a repository URL, not a ZIP.
 
-**Status:** In progress
+**Status:** Completed
 
-The local `hw4` submission folder is prepared. GitHub publication is still pending because GitHub CLI is unavailable and no public repository URL has been supplied. Problem 11 evidence is now present in `output/app_check.html`.
+The lowercase `hw4` submission was committed and pushed to `https://github.com/DanielKim-94/hw4`. The final local commit is the branch tip, and Problem 11 evidence is present in `output/app_check.html`.
 
 ### Problem 5 follow-up
 

@@ -51,3 +51,5 @@ npm run build
 ```
 
 The app uses real catalogue and inventory data, session-scoped chat history, structured agent tools, and an append-only `output/audit_trail.json`. Problem 11 evidence is in `output/app_check.html` with screenshots in `output/app_check_images/`.
+
+The public submission repository is https://github.com/DanielKim-94/hw4.
